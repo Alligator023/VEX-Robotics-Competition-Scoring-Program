@@ -16,7 +16,7 @@ public class TIPPINGPOINT_Match {
     public static GUI.Frame window;
     public static void main(String[] args) throws InterruptedException {
         // GUI CREATION
-        window = new GUI.Frame();
+        window = new GUI.Frame("VEX Robotics Competition 2022-2023 Tipping Point - SCORING PROGRAM");
 
 
         // Create the Robot Array, named Robots. Fill the array with two red robots and two blue robots.

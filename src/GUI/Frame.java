@@ -18,9 +18,9 @@ public class Frame {
     public JTextField redScore = new JTextField("", 3);
     JPanel blueScorePanel = new JPanel();
     public JTextField blueScore = new JTextField("", 3);
-    public Frame() {
+    public Frame(String name) {
         matchDone = false;
-        frame = new JFrame("VEX Robotics Competition 2022-2023 Spin Up - SCORING PROGRAM");
+        frame = new JFrame(name);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         inputPanel.setLayout(new BorderLayout());
         inputPanel.add(input);
