@@ -1,2 +1,5 @@
 # Project exclude paths
 /out/
+/GUI/ButtonListenerEx.java
+/GUI/dogboneicon.png
+/GUI/JFrameExample
