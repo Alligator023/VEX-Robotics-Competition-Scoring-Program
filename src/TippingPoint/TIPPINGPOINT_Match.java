@@ -10,9 +10,7 @@ import java.awt.*;
 
 public class TIPPINGPOINT_Match {
     private static final TIPPINGPOINT_Robot[] robots = new TIPPINGPOINT_Robot[4];
-    private static final SPINUP_Goal[] goals = new SPINUP_Goal[2];
-    private static final SPINUP_Roller[] rollers = new SPINUP_Roller[4];
-    private static final SPINUP_CornerZone[] zones = new SPINUP_CornerZone[2];
+    private static final TIPPINGPOINT_Goal[] goals = new TIPPINGPOINT_Goal[7];
     private static char autonWin;
     public static boolean nextQuestion = false;
     public static GUI.Frame window;
@@ -47,22 +45,15 @@ public class TIPPINGPOINT_Match {
         robots[3] = new TIPPINGPOINT_Robot(window.submitText, 'B');
         nextQuestion = false;
 
-        // Create the Goal Array, named Goals. Fill it with a red Goal and a blue Goal
+        // Create the Goal Array, named Goals. Fill it with the correct number of goals.
 
-        goals[0] = new SPINUP_Goal('R'); // RED GOAL
-        goals[1] = new SPINUP_Goal('B'); // BLUE GOAL
-
-        // Create the Roller Array, named Rollers. Fill it with two rollers on the red side, and two on the blue side.
-
-        rollers[0] = new SPINUP_Roller('R'); // RED ROLLER 1
-        rollers[1] = new SPINUP_Roller('r'); // RED ROLLER 2
-        rollers[2] = new SPINUP_Roller('B'); // BLUE ROLLER 1
-        rollers[3] = new SPINUP_Roller('b'); // BLUE ROLLER 2
-
-        // Create a CornerZone Array, named Zones. Fill it with a red Zone and a blue Zone.
-
-        zones[0] = new SPINUP_CornerZone('R'); // RED ZONE (under Blue Goal)
-        zones[1] = new SPINUP_CornerZone('B'); // BLUE ZONE (under Red Goal)
+        goals[0] = new TIPPINGPOINT_Goal('R'); // RED GOAL 1
+        goals[1] = new TIPPINGPOINT_Goal('R'); // RED GOAL 2
+        goals[2] = new TIPPINGPOINT_Goal('B'); // BLUE GOAL 1
+        goals[3] = new TIPPINGPOINT_Goal('B'); // BLUE GOAL 2
+        goals[4] = new TIPPINGPOINT_Goal('N'); // NEUTRAL GOAL 1
+        goals[5] = new TIPPINGPOINT_Goal('N'); // NEUTRAL GOAL 2
+        goals[6] = new TIPPINGPOINT_TallGoal(); // TALL GOAL
 
         // Create a variable for Auton Winner
         autonWin = 0;
@@ -70,66 +61,127 @@ public class TIPPINGPOINT_Match {
         // BEGIN SCORING SETUP --------------------------------------------------------------------------
         // Write commands to set up the scenario which you wish to score
 
-        window.input.setText("Discs in RHG");
+        window.input.setText("Red Goals owned (inc. balanced) by Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        goals[0].addDiscs(Integer.parseInt(window.submitText));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i].setOwner('R');
+        }
         nextQuestion = false;
-        window.input.setText("Discs in BHG");
+        window.input.setText("Neutral Goals owned by Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        goals[1].addDiscs(Integer.parseInt(window.submitText));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i+4].setOwner('R');
+        }
         nextQuestion = false;
-        window.input.setText("Color of Roller 1");
+        window.input.setText("Blue Goals owned by Blue");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        rollers[0].setColor(window.submitText.charAt(0));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i+2].setOwner('B');
+        }
         nextQuestion = false;
-        window.input.setText("Color of Roller 2");
+        window.input.setText("Neutral Goals owned by Blue");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        rollers[1].setColor(window.submitText.charAt(0));
+        int x = 6;
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[x].setOwner('B');
+            x--;
+        }
         nextQuestion = false;
-        window.input.setText("Color of Roller 3");
+        window.input.setText("Red Goals balanced on Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        rollers[2].setColor(window.submitText.charAt(0));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i].setBalanced(true);
+        }
         nextQuestion = false;
-        window.input.setText("Color of Roller 4");
+        window.input.setText("Blue Goals balanced on Blue");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        rollers[3].setColor(window.submitText.charAt(0));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i+2].setBalanced(true);
+        }
         nextQuestion = false;
-        window.input.setText("Discs in RLG");
+        window.input.setText("Neutral Goals balanced on Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        zones[0].addDiscs(Integer.parseInt(window.submitText));
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[i+4].setBalanced(true);
+        }
         nextQuestion = false;
-        window.input.setText("Discs in BLG");
+        window.input.setText("Neutral Goals balanced on Blue");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        zones[1].addDiscs(Integer.parseInt(window.submitText));
+        x = 6;
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            goals[x].setBalanced(true);
+            x--;
+        }
         nextQuestion = false;
-        window.input.setText("Tiles covered by Red");
+        window.input.setText("Rings in bases that count for Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[0].setTiles(Integer.parseInt(window.submitText));
+        goals[0].addRingsBase(Integer.parseInt(window.submitText));
         nextQuestion = false;
-        window.input.setText("Tiles covered by Blue");
+        window.input.setText("Rings on branches that count for Red");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[2].setTiles(Integer.parseInt(window.submitText));
+        goals[0].addRingsBranch(Integer.parseInt(window.submitText));
         nextQuestion = false;
+        window.input.setText("Rings on high branches that count for Red");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        ((TIPPINGPOINT_TallGoal)goals[6]).addRingsTall(Integer.parseInt(window.submitText));
+        nextQuestion = false;
+        window.input.setText("Rings in bases that count for Blue");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        goals[2].addRingsBase(Integer.parseInt(window.submitText));
+        nextQuestion = false;
+        window.input.setText("Rings on branches that count for Blue");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        goals[2].addRingsBranch(Integer.parseInt(window.submitText));
+        nextQuestion = false;
+        window.input.setText("Rings on high branches that count for Blue");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        ((TIPPINGPOINT_TallGoal)goals[6]).addRingsTall(Integer.parseInt(window.submitText));
+        nextQuestion = false;
+        window.input.setText("Red robots parked");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            robots[i].setParked(true);
+        }
+        nextQuestion = false;
+        window.input.setText("Blue robots parked");
+        while(!nextQuestion) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
+        for(int i = 0; i < Integer.parseInt(window.submitText); i++) {
+            robots[i+2].setParked(true);
+        }
+        nextQuestion = false;
+
         window.input.setText("Auton Winner");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
@@ -164,22 +216,30 @@ public class TIPPINGPOINT_Match {
     public static int redScore() {
         int score = 0;
 
-        score += robots[0].getTiles() * 3;
-
-        score += goals[0].getDiscs() * 5;
-
-        for(SPINUP_Roller x : rollers) {
-            if(x.getColor().equals("Red")) {
-                score += 10;
+        for(int i = 0; i < goals.length; i++) {
+            if(goals[i].getOwner() == 'R') {
+                score += 20;
+                if(goals[i].getBalanced()) {
+                    score += 20;
+                }
             }
         }
 
-        score += zones[0].getDiscs();
+        for(int i = 0; i < 2; i++) {
+            if(robots[i].getParked()) {
+                score += 30;
+            }
+        }
+
+        score += goals[0].getRingsBase() + goals[0].getRingsBranch() * 3;
+        if(goals[6].getOwner() == 'R') {
+            score += ((TIPPINGPOINT_TallGoal)goals[6]).getRingsTall() * 10;
+        }
 
         if(autonWin == 'R' || autonWin == 'r') {
-            score += 10;
+            score += 6;
         } else if(autonWin == 'T' || autonWin == 't') {
-            score += 5;
+            score += 3;
         }
         return score;
     }
@@ -187,22 +247,30 @@ public class TIPPINGPOINT_Match {
     public static int blueScore() {
         int score = 0;
 
-        score += robots[2].getTiles() * 3;
-
-        score += goals[1].getDiscs() * 5;
-
-        for(SPINUP_Roller x : rollers) {
-            if(x.getColor().equals("Blue")) {
-                score += 10;
+        for(int i = 0; i < goals.length; i++) {
+            if(goals[i].getOwner() == 'B') {
+                score += 20;
+                if(goals[i].getBalanced()) {
+                    score += 20;
+                }
             }
         }
 
-        score += zones[1].getDiscs();
+        for(int i = 0; i < 2; i++) {
+            if(robots[i+2].getParked()) {
+                score += 30;
+            }
+        }
+
+        score += goals[2].getRingsBase() + goals[2].getRingsBranch() * 3;
+        if(goals[6].getOwner() == 'B') {
+            score += ((TIPPINGPOINT_TallGoal)goals[6]).getRingsTall() * 10;
+        }
 
         if(autonWin == 'B' || autonWin == 'b') {
-            score += 10;
+            score += 6;
         } else if(autonWin == 'T' || autonWin == 't') {
-            score += 5;
+            score += 3;
         }
         return score;
     }
