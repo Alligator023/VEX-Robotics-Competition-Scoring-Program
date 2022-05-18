@@ -1,0 +1,4 @@
+This is a Java Package used to display other Game Packages of the same version.
+
+The Main (runner) method of the Match class of each Game Package is auto-compatible with this GUI package.
+Read the README of a Game Package for instructions on how to use that Package.

@@ -1,0 +1,31 @@
+This is a Java package meant to load and score VEX Robotics Competition Spin Up matches.
+
+This Package requires the GUI Package of the same version as well. They must be in the same project to run.
+
+
+
+
+
+Instructions:
+
+
+Run SPINUP_Match (It will default to running the main method).
+
+Allow the GUI Window to load up. Click on the text field in the middle of the upper bar. Type in the name of the first
+Red team, then press Enter or click the Submit button (either one works). Click again on the text field, and do it again
+for Red 2. Repeat for the Blue teams.
+
+Click again. Type in the number of discs in the Red High Goal, then press enter. Repeat for BHG as well.
+
+Click and type in the letter corresponding to the alliance that owns Roller 1 (R or B, N for neutral), and press enter.
+Repeat for each roller.
+
+Click and type in the number of discs in the Red Low Goal, and press enter. Repeat for BLG as well.
+
+Click and type in the number of tiles covered by the Red Alliance, and press enter. Repeat for Blue.
+
+Click and type in the letter corresponding to the alliance that won Auton (T for a tie) and press enter.
+
+Scores and winners are displayed.
+
+Press enter while in the text box to end the program.
