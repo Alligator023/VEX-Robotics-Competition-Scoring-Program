@@ -1,10 +1,15 @@
-package SpinUp;
+package TippingPoint;
+import SpinUp.SPINUP_CornerZone;
+import SpinUp.SPINUP_Goal;
+import SpinUp.SPINUP_Robot;
+import SpinUp.SPINUP_Roller;
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.awt.*;
 
-public class SPINUP_Match {
-    private static final SPINUP_Robot[] robots = new SPINUP_Robot[4];
+public class TIPPINGPOINT_Match {
+    private static final TIPPINGPOINT_Robot[] robots = new TIPPINGPOINT_Robot[4];
     private static final SPINUP_Goal[] goals = new SPINUP_Goal[2];
     private static final SPINUP_Roller[] rollers = new SPINUP_Roller[4];
     private static final SPINUP_CornerZone[] zones = new SPINUP_CornerZone[2];
@@ -21,25 +26,25 @@ public class SPINUP_Match {
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[0] = new SPINUP_Robot(window.submitText, 'R');
+        robots[0] = new TIPPINGPOINT_Robot(window.submitText, 'R');
         nextQuestion = false;
         window.input.setText("Red 2");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[1] = new SPINUP_Robot(window.submitText, 'R');
+        robots[1] = new TIPPINGPOINT_Robot(window.submitText, 'B');
         nextQuestion = false;
         window.input.setText("Blue 1");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[2] = new SPINUP_Robot(window.submitText, 'B');
+        robots[2] = new TIPPINGPOINT_Robot(window.submitText, 'B');
         nextQuestion = false;
         window.input.setText("Blue 2");
         while(!nextQuestion) {
             TimeUnit.MILLISECONDS.sleep(1);
         }
-        robots[3] = new SPINUP_Robot(window.submitText, 'B');
+        robots[3] = new TIPPINGPOINT_Robot(window.submitText, 'B');
         nextQuestion = false;
 
         // Create the Goal Array, named Goals. Fill it with a red Goal and a blue Goal
