@@ -13,8 +13,8 @@ public class SPINUP_Match {
     public static GUI.Frame window;
     public static void main(String[] args) throws InterruptedException {
         // GUI CREATION
-        window = new GUI.Frame("VEX Robotics Competition 2022-2023 Spin Up - SCORING PROGRAM");
-
+        window = new GUI.Frame("VEX Robotics Competition 2022-2023 Spin Up - SCORING PROGRAM", "SU");
+        nextQuestion = false;
 
         // Create the Robot Array, named Robots. Fill the array with two red robots and two blue robots.
         window.input.setText("Red 1");

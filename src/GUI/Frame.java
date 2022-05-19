@@ -1,5 +1,6 @@
 package GUI;
 import SpinUp.SPINUP_Match;
+import TippingPoint.TIPPINGPOINT_Match;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,7 +19,7 @@ public class Frame {
     public JTextField redScore = new JTextField("", 3);
     JPanel blueScorePanel = new JPanel();
     public JTextField blueScore = new JTextField("", 3);
-    public Frame(String name) {
+    public Frame(String name, String s) {
         matchDone = false;
         frame = new JFrame(name);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +55,11 @@ public class Frame {
                     frame.dispose();
                 } else {
                     submitText = input.getText();
-                    SPINUP_Match.nextQuestion = true;
+                    switch(s) {
+                        case("TP") :
+                            TIPPINGPOINT_Match.nextQuestion = true; break;
+                        case("SU") : SPINUP_Match.nextQuestion = true; break;
+                    }
                 }
             }
         });
