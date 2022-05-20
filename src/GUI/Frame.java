@@ -3,7 +3,6 @@ import SpinUp.SPINUP_Match;
 import TippingPoint.TIPPINGPOINT_Match;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -40,26 +39,17 @@ public class Frame {
                 input.setText("");
             }
         });
-        input.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                submitButton.doClick();
-            }
-        });
+        input.addActionListener(e -> submitButton.doClick());
         frame.add(inputPanel, BorderLayout.NORTH);
         frame.add(submitButton, BorderLayout.SOUTH);
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(matchDone) {
-                    frame.dispose();
-                } else {
-                    submitText = input.getText();
-                    switch(s) {
-                        case("TP") :
-                            TIPPINGPOINT_Match.nextQuestion = true; break;
-                        case("SU") : SPINUP_Match.nextQuestion = true; break;
-                    }
+        submitButton.addActionListener(e -> {
+            if(matchDone) {
+                frame.dispose();
+            } else {
+                submitText = input.getText();
+                switch (s) {
+                    case ("TP") -> TIPPINGPOINT_Match.nextQuestion = true;
+                    case ("SU") -> SPINUP_Match.nextQuestion = true;
                 }
             }
         });
